@@ -1,16 +1,17 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../actions/cartActions";
+import { addToCart, deleteFromCart } from "../actions/cartActions";
 export default function Cartscreen() {
   const cartState = useSelector((state) => state.cart);
   const cartItems = cartState.cartItems;
+  var subTotal= cartItems.reduce((x,item)=>x+item.price,0)  
   const dispatch = useDispatch()
 
   return (
     <div>
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <h2 style={{ fontSize: "40px" }}>My Cart</h2>
+          <h2 style={{ fontSize: '40px' }}>My Cart</h2>
           {cartItems.map((item) => {
             return (
               <div  key={item._id+1} className="flex-container">
@@ -30,14 +31,16 @@ export default function Cartscreen() {
                 </div>
 
                 <div className="m-1 w-100">
-                <i className="fa fa-trash mt-2" aria-hidden="true"></i>
+                <i className="fa fa-trash mt-2" aria-hidden="true" onClick={()=>{dispatch(deleteFromCart(item))}}></i>
                 </div>
               </div>
             );
           })}
         </div>
 
-        <div className="col-md-4"></div>
+        <div className="col-md-4">
+          <h2 style={{fontWeight:"bold"}}>Subtotal:{subTotal}/-</h2>
+        </div>
       </div>
     </div>
   );

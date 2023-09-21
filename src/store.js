@@ -6,11 +6,13 @@ import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import { getAllPizzasReducers } from './reducers/pizzaReducers'
 import { cartReducer } from './reducers/cartReducer'
+import { registerUserReducer } from './reducers/userReducers'
 
 
 const finalReducer = combineReducers({
 	getAllPizzas: getAllPizzasReducers,
 	cart: cartReducer,
+	registerUser:registerUserReducer
 
 });
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {useSelector, useDispatch } from 'react-redux';
+import {useSelector } from 'react-redux';
 
 
 export default function Navbar() {
@@ -9,7 +9,7 @@ export default function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg shadow-lg p-3 mb-5 bg-white rounded">
         <a className="navbar-brand" href="/">
-          Maria Pizza
+          Ebru Pizza
         </a>
         <button
           className="navbar-toggler"
@@ -25,7 +25,7 @@ export default function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto " style={{marginLeft:0}} >
             <li className="nav-item">
-              <a className="nav-link" href="#">
+              <a className="nav-link" href="/login">
                 Login
               </a>
             </li>
