@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export const registerUser =(user)=>async dispatch=>{
-
+debugger;
     dispatch({type:'USER_REGISTER_REQUEST'})
 
     try{
@@ -11,6 +11,21 @@ export const registerUser =(user)=>async dispatch=>{
        console.log(response)
     }catch(error){
         dispatch({type:'USER_REGISTER_FAILED' , payload:error})
+
+    }
+}
+
+export const loginUser =(user)=>async dispatch=>{
+
+    dispatch({type:'USER_LOGIN_REQUEST'})
+
+    try{
+
+       const response = await axios.post('http://127.0.0.1:9000/api/users/login/',user)
+       dispatch({type:'USER_LOGIN_SUCCESS'})
+       console.log(response)
+    }catch(error){
+        dispatch({type:'USER_LOGIN_FAILED' , payload:error})
 
     }
 }

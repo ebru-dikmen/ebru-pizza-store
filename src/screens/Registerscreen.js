@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button } from '@chakra-ui/react';
 import {useDispatch, useSelector} from "react-redux"
 import { registerUser } from "../actions/userActions";
+
+
 export default function Registerscreen() {
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
@@ -23,12 +25,12 @@ export default function Registerscreen() {
     //   dispatch(registerUser)
     // }
       const user={
-          name:name,
+        name:{ name},
           email:email,
           password:password
         }
-        console.log(user)
-        dispatch(registerUser());
+        debugger;
+        dispatch(registerUser(user));
   }
   return (
     <div className="row justify-content-center mt-5">
