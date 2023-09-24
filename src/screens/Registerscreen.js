@@ -27,7 +27,6 @@ export default function Registerscreen() {
       const user={
         name:{ name},
           email:email,
-          password:password
         }
         debugger;
         dispatch(registerUser(user));

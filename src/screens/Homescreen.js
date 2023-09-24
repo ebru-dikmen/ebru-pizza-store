@@ -2,14 +2,13 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {  getAllPizzas } from '../actions/pizzaActions'
 import Pizza from '../components/Pizza'
-import { Button, Flex, SimpleGrid, Text, VStack } from '@chakra-ui/react';
+import { Flex, SimpleGrid } from '@chakra-ui/react';
 export default function Homescreen() {
 
   const dispatch = useDispatch();
 
   const pizzasstate = useSelector(state => state.getAllPizzas);
   const { pizzas, error, loading } = pizzasstate;
-  
   useEffect(() => {
     dispatch(getAllPizzas())
   }, [dispatch])
@@ -44,7 +43,7 @@ export default function Homescreen() {
                 alignItems={'center'}
                 justifyContent='center'
               >
-                <Pizza key={pizza._id} pizza={pizza} />
+                <Pizza key={pizza} pizza={pizza} />
               </Flex>
             );
           })}

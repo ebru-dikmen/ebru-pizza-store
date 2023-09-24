@@ -1,10 +1,12 @@
 import React from "react";
-import {useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 export default function Navbar() {
- const cartState = useSelector(state=>state.cart);
-
+  debugger;
+  const cartState = useSelector(state => state.cart);
+  const userState = useSelector(state => state.loginUser);
+  const { currentUser } = userState
   return (
     <div>
       <nav className="navbar navbar-expand-lg shadow-lg p-3 mb-5 bg-white rounded">
@@ -23,12 +25,25 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto " style={{marginLeft:0}} >
-            <li className="nav-item">
-              <a className="nav-link" href="/login">
-                Login
+          <ul className="navbar-nav ms-auto " style={{ marginLeft: 0 }} >
+
+            {currentUser ? (<div className="dropdown mt-2">
+              <a className="dropdown-toggle nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {currentUser.name}
               </a>
-            </li>
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a className="dropdown-item" href="#">Order</a>
+                <a className="dropdown-item" href="#">Another action</a>
+           
+              </div>
+            </div>) : (
+              <li className="nav-item">
+                <a className="nav-link" href="/login">
+                  Login
+                </a>
+              </li>
+            )}
+
             <li className="nav-item">
               <a className="nav-link" href="/cart">
                 Cart {cartState.cartItems.length}

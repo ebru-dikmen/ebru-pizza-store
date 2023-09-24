@@ -1,20 +1,25 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from '@chakra-ui/react';
 import {useDispatch, useSelector} from "react-redux"
 import {loginUser} from '../actions/userActions'
 
 export default function Loginscreen() {
 
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+  const [name, setname] = useState("");
 
   const dispatch = useDispatch();
 
+  useEffect(()=>{
+
+    if(localStorage.getItem('currentUser')){
+      window.location.href='/'
+    }
+  },[])
   function login(){
    
-    const user = {email, password};
-    dispatch(login(user));
+    const user = {name};
+    dispatch(loginUser(user));
   }
 
   return (
@@ -28,22 +33,12 @@ export default function Loginscreen() {
             type="text"
             placeholder="email"
             className="form-control"
-            value={email}
+            value={name}
             onChange={(e) => {
-              setemail(e.target.value);
+              setname(e.target.value);
             }}
           />
-          <input
-            required
-            type="text"
-            placeholder="password"
-            className="form-control"
-            value={password}
-            onChange={(e) => {
-              setpassword(e.target.value);
-            }}
-          />
-      
+         
           <Button className="btn mt-5" onClick={login}>LOGIN</Button>
         </div>
       </div>
