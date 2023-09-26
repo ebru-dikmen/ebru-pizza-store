@@ -10,7 +10,7 @@ export default function Cartscreen() {
   return (
     <div>
       <div className="row justify-content-center">
-        <div className="col-md-6">
+        <div className="col-md-5 mt-5 text-left shadow-lg p-3 mb-5 bg-white rounded">
           <h2 style={{ fontSize: '40px' }}>My Cart</h2>
           {cartItems.map((item) => {
             return (
