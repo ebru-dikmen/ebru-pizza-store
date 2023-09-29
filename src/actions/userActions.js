@@ -6,8 +6,8 @@ export const registerUser =(user)=>async dispatch=>{
     try{
 
        const response = await axios.post('http://127.0.0.1:9000/api/users/register/',user)
-       dispatch({type:'USER_REGISTER_SUCCESS',payload:response.data})
-       console.log(response)
+       dispatch({type:'USER_REGISTER_SUCCESS',payload:response.data});
+       localStorage.setItem('currentUser',JSON.stringify(response.data));
     }catch(error){
         dispatch({type:'USER_REGISTER_FAILED' , payload:error})
 
@@ -15,7 +15,7 @@ export const registerUser =(user)=>async dispatch=>{
 }
 
 export const loginUser = (user) => async(dispatch) =>{
-
+debugger;
     dispatch({type:'USER_LOGIN_REQUEST'})
     try{
        const response = await axios.post('http://127.0.0.1:9000/api/users/login/',user)
@@ -23,7 +23,6 @@ export const loginUser = (user) => async(dispatch) =>{
        console.log( response.data)
        localStorage.setItem('currentUser',JSON.stringify(response.data));
        window.location.href='/'
-       console.log(response)
     }catch(error){
         dispatch({type:'USER_LOGIN_FAILED' , payload:error})
 
@@ -52,4 +51,20 @@ export const getAllUsers = () => async (dispatch) => {
 
 export const setUserData = (userData) => (dispatch) => {
 	dispatch({ type: 'SET_USER_DATA', payload: userData });
+};
+
+export const deleteUser = (userId) => async (dispatch) => {
+	dispatch({ type: 'DELETE_USER_REQUEST' });
+	try {
+		const response = await axios.post(
+			'http://127.0.0.1:9000/api/users/deleteuser',
+			{ userid: userId },
+		);
+		console.log(response);
+		alert('User deleted successfully');
+		dispatch({ type: 'DELETE_USER_SUCCESS' });
+		window.location.reload();
+	} catch (error) {
+		dispatch({ type: 'DELETE_USER_FAILED', payload: error });
+	}
 };

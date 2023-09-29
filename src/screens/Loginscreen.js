@@ -21,7 +21,7 @@ export default function Loginscreen() {
   },[])
   function login(){
    
-    const user = {name};
+    const user = {name,password};
     dispatch(loginUser(user));
   }
 

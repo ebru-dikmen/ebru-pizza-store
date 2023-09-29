@@ -1,12 +1,21 @@
 import React from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser,loginUser } from "../actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser, loginUser } from "../actions/userActions";
 
 export default function Navbar() {
-  const cartState = useSelector(state => state.cart);
-  const userState = useSelector(state => state.loginUser);
-  const { currentUser } = userState
-  const dispatch= useDispatch()
+  const cartState = useSelector((state) => state.cart);
+  const userState = useSelector((state) => state.loginUser);
+  const { currentUser } = userState;
+  console.log(userState);
+  const x = localStorage.getItem("currentUser");
+  var y = JSON.parse(x);
+
+  function logoutUser() {
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("currentUser");
+    window.location.replace("/");
+  }
+  const dispatch = useDispatch();
   return (
     <div>
       <nav className="navbar navbar-expand-lg shadow-lg p-3 mb-5 bg-white rounded">
@@ -24,33 +33,51 @@ export default function Navbar() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ms-auto " style={{ marginLeft: 0 }} >
-
-            {currentUser ? (<div className="dropdown mt-2">
-              <div className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {currentUser.name}
+        <select className="collapse navbar-collapse" id="navbarNav">
+       
+            {y ? (
+              <div className="dropdown show">
+                <div
+                  className="dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {y.name}
+                </div>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <a className="dropdown-item" href="#">Something else here</a>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => {
+                      dispatch(logoutUser());
+                    }}
+                  >
+                    <option>Logout</option>
+                  </a>
+                </div>
               </div>
-              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a className="dropdown-item" href="#">Orders</a>
-                <a className="dropdown-item" href="#" onClick={()=>{dispatch(logoutUser())}} ><li>Logout</li></a>
-           
-              </div>
-            </div>) : (
-              <li className="nav-item">
+            ) : (
+              <option className="nav-item">
                 <a className="nav-link" href="/login">
                   Login
                 </a>
-              </li>
+              </option>
             )}
 
-            <li className="nav-item">
+            <option className="nav-item">
               <a className="nav-link" href="/cart">
                 Cart {cartState.cartItems.length}
               </a>
-            </li>
-          </ul>
-        </div>
+            </option>
+      
+        </select>
       </nav>
     </div>
   );

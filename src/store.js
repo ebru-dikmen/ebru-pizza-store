@@ -6,6 +6,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import { getAllPizzasReducers ,addPizzaReducer,updatePizzaReducer,getPizzaByIdReducer} from './reducers/pizzaReducers'
 import { cartReducer } from './reducers/cartReducer'
 import { registerUserReducer ,loginUserReducer, getAllUsersReducer} from './reducers/userReducers'
+import { getAllOrdersReducer } from './reducers/orderReducer'
 
 
 const finalReducer = combineReducers({
@@ -16,7 +17,8 @@ const finalReducer = combineReducers({
 	addPizza:addPizzaReducer,
 	getPizzaById: getPizzaByIdReducer,
 	updatePizza: updatePizzaReducer,
-	getAllUsers:getAllUsersReducer
+	getAllUsers:getAllUsersReducer,
+	getAllOrders:getAllOrdersReducer
 
 });
 

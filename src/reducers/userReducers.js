@@ -20,6 +20,7 @@ export const registerUserReducer = (state = {}, action) => {
 };
 
 export const loginUserReducer = (state = {currentUser:{}}, action) => {
+  debugger;
   switch (action.type) {
     case "USER_LOGIN_REQUEST":
       return {

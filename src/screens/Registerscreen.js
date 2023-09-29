@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { Button } from '@chakra-ui/react';
-import {useDispatch, useSelector} from "react-redux"
+import { Button } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../actions/userActions";
-import Loading from '../components/Loading';
-import Error from '../components/Error';
-import Success from '../components/Success'
+import Loading from "../components/Loading";
+import Error from "../components/Error";
+import Success from "../components/Success";
 
 export default function Registerscreen() {
   const [name, setname] = useState("");
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [cpassword, setcpassword] = useState("");
-  const registerstate = useSelector(state=>state.registerUser)
-  const {error,loading,success} = registerstate;
-  const dispatch = useDispatch()
-  function registeruser(){
+  const registerstate = useSelector((state) => state.registerUser);
+  const { error, loading, success } = registerstate;
+  const dispatch = useDispatch();
+  function registeruser() {
     // if(password!==cpassword){
     //   alert('Passwords are not matched');
 
@@ -27,20 +27,20 @@ export default function Registerscreen() {
     //   console.log(user)
     //   dispatch(registerUser)
     // }
-      const user={
-        name:{ name},
-          email:email,
-          password:password
-        }
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+    };
 
-        dispatch(registerUser(user));
+    dispatch(registerUser(user));
   }
   return (
     <div className="row justify-content-center mt-5">
       <div className="col-md-5 mt-5 text-left shadow-lg p-3 mb-5 bg-white rounded">
-        {loading && (<Loading/>)}
-        {success && (<Success success='User registered successfully'/>)}
-        {error && (<Error error='Email already registered '/>)}
+        {loading && <Loading />}
+        {success && <Success success="User registered successfully" />}
+        {error && <Error error="Email already registered " />}
         <div>
           <h2 style={{ fontWeight: "bold" }}>Register</h2>
           <input
@@ -83,9 +83,13 @@ export default function Registerscreen() {
               setcpassword(e.target.value);
             }}
           />
-          <Button className="btn mt-5" onClick={registeruser}>REGISTER</Button>
-          <br/>
-          <a style={{color:'black'}} href="/login">Click here to login</a>
+          <Button className="btn mt-5" onClick={registeruser}>
+            REGISTER
+          </Button>
+          <br />
+          <a style={{ color: "black" }} href="/login">
+            Click here to login
+          </a>
         </div>
       </div>
     </div>
